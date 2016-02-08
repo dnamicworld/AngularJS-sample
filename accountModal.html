@@ -1,0 +1,66 @@
+<div class="modal-dialog account-modal" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close x-modal-button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" class="fa fa-times"></span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">Account Settings for user:  {{settings.username}} </h4>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <label>Change Password:</label>
+        <div class="form-group">
+          <label class="col-sm-4 col-xs-4 control-label password-label">Current Password</label>
+          <div class="col-sm-8 col-xs-8">
+            <input ng-model="settings.currentPassword" type="password"
+                   class="form-control" placeholder="Current Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 col-xs-4 control-label password-label">New password</label>
+          <div class="col-sm-8 col-xs-8">
+            <input ng-model="settings.newPassword" type="password"
+                   class="form-control" placeholder="New Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 col-xs-4 control-label password-label">Confirm new password</label>
+          <div class="col-sm-8 col-xs-8">
+            <input ng-model="settings.confirmPassword" type="password"
+                   class="form-control" placeholder="Confirm new password">
+          </div>
+        </div>
+        <div class="update-pswrd-error alert alert-danger alert-dismissible" role="alert" ng-if="error.length">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="">{{error}}</span>
+        </div>
+        <div class="update-pswrd-feedback alert alert-success alert-dismissible" role="alert" ng-if="feedback.length">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span>{{feedback}}</span><a href="javascript:void(0);" data-dismiss="modal"> Close this window </a>
+        </div>
+        <hr>
+        <label>Time Zone: </label>
+        <select class="btn btn-select-zone" ng-model="settings.timeZone"
+                ng-options="timezone.value as timezone.name for timezone in timeZones">
+        </select>
+        <hr>
+        <label>Odds: </label>
+        <div class="btn-group odds-btn-container" data-toggle="buttons">
+          <label class="btn btn-odds" ng-class="{'active' : settings.odds === 'U'}" ng-click="takeOdds('U')">
+            <input type="radio" name="options" id="option1" autocomplete="off">
+            <i class="fa pull-left" ng-class="settings.odds === 'U' ? 'fa-dot-circle-o' : 'fa-circle-o'"></i>American
+          </label>
+          <label class="btn btn-odds" ng-class="{'active' : settings.odds === 'E'}" ng-click="takeOdds('E')">
+            <input type="radio" name="options" id="option2" autocomplete="off" ng-model="settings.odds">
+            <i class="fa pull-left" ng-class="settings.odds === 'E' ? 'fa-dot-circle-o' : 'fa-circle-o'"></i>European
+          </label>
+        </div>
+        <hr>
+        <div class="buttons-container">
+          <button type="button" ng-click="saveSettingsChanges(settings)" class="btn btn-yellow">Save Changes</button>
+          <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
